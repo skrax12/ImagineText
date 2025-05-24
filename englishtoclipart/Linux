@@ -1,0 +1,22 @@
+ubuntu;ubuntu;
+mint;Linux mint;
+sudo;sudo linux;
+ls;ls list
+dir;dir linux;
+apt;apt linux;
+arg;programming;
+
+std;std cpp;
+grep;grep cpp;
+cout;cout cpp;
+hyprcursor;hyprcursor;
+hyprlang;hyprlang;
+hyprland;hyprland linux;
+hyprgraphics;hyprgraphics;
+wayland;wayland linux;
+hyprwayland;hyprwayland;
+installing;installing
+meson;meson;
+gcc;gcc 14;
+libxcb1;libxcb1;
+main
