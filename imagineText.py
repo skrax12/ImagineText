@@ -5,8 +5,9 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver import chrome
 import time
 import re
-import readandwrite
 import webbrowser
+import readandwrite
+import helperfunctions
 
 def search_images_on_google(input_data, mode, language, s, SyntacticUnit, searchPhrase):
     if language == 'cro':
@@ -65,7 +66,7 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
     sentences = re.split(r'[.!?]', text_content)
     sentences = re.split(r'[-•!?]', text_content)
     #sentences = re.split(r'[–→⇒•▪”.,;:()!?]', text_content)
-    sentences = re.split(r'[-–—↔→⇒•▪”".,;:()!?]', text_content)
+    sentences = re.split(r'[-–—↔→⇒•▪”“".,;:()|!?]', text_content)
     #sentences = re.split(r'[().,:-]', text_content)
 
     # Remove leading/trailing whitespaces from each sentence
@@ -88,16 +89,18 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
             syntactic_units = phrases
         count = 0
         # Search each word or word phrase on Google Images
-        for syntactic_unit in syntactic_units:
-            syntactic_unit = syntactic_unit.lower()
-          #  if syntactic_unit == "is":
-            #    syntactic_unit = "to be"
-           # elif syntactic_unit == "be":
-            #    syntactic_unit = "to be"
-           # elif syntactic_unit == "was":
-              #  syntactic_unit = "to be"
+        for i in range(len(syntactic_units)):
+            syntactic_units[i] = syntactic_units[i].lower()
+          #  if syntactic_units[i] == "is":
+            #    syntactic_units[i] = "to be"
+           # elif syntactic_units[i] == "be":
+            #    syntactic_units[i] = "to be"
+           # elif syntactic_units[i] == "was":
+              #  syntactic_units[i] = "to be"
 
-            word_length = len(syntactic_unit)
+            word_length = len(syntactic_units[i])
+
+            syntactic_units[i] = helperfunctions.process_text_numbers(syntactic_units[i])
 
             files = readandwrite.readdir('englishtoclipart')
 
@@ -106,12 +109,23 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
                 lines = readandwrite.read(filenpath)
                 for line in lines:
                     parts = [part.strip() for part in line.split(';')]
-                    if syntactic_unit == parts[0]:
-                        syntactic_unit = parts[1]
+
+                    if "," in parts[0]:
+                        subparts = [subpart.strip() for subpart in parts[0].split(',')]
+                        if syntactic_units[i-1] == subparts[0] and syntactic_units[i] == subparts[1]:
+                            syntactic_units[i] = parts[1]
+                            if len(parts) >= 3:
+                                clipart = True
+                        elif 0 <= i+1 < len(syntactic_units):
+                            if syntactic_units[i+1] == subparts[0] and syntactic_units[i] == subparts[1]:
+                                syntactic_units[i] = parts[1]
+                                if len(parts) >= 3:
+                                    clipart = True
+                    elif syntactic_units[i] == parts[0]:
+                        syntactic_units[i] = parts[1]
                         if len(parts) >= 3:
                             clipart = True
                     # print(line)
-
 
             if word_length < 3:
                 delay_seconds = max(1, word_length / 5)*2*float(s)  # Adjust the factor as needed
@@ -120,7 +134,7 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
 
 
             t = 2
-            encoded_syntactic_unit = quote(syntactic_unit)
+            encoded_syntactic_unit = quote(syntactic_units[i])
 
             if mode == "go":
                 search_query2 = f"https://www.google.com/search?q={encoded_syntactic_unit}"
@@ -193,7 +207,7 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
                 search_query = f"https://earth.google.com/web/search/{encoded_syntactic_unit}"
                 search_query2 = f"https://www.youtube.com/results?search_query={encoded_syntactic_unit} timelapse&sp=CAM%253D"
             elif mode == "url":
-                search_query2 = f"https://{encoded_syntactic_unit}"
+                search_query2 = f"https://www.youtube.com/feed/history?query={encoded_syntactic_unit}"
 
             #time.sleep(5)
             # Open a new tab with the search query URL
