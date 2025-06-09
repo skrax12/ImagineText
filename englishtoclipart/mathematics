@@ -1,17 +1,45 @@
 #math
-assumption;assumption math
-relation;relation math
+
+logic;logic
+assumption;assumption logic math
+induction;induction iq test;
+inductive;inductive reasoning test;
+deduction;deduction iq test;
+deductive;inductive reasoning test
+reasoning;reasoning test;
+
+probability;probability
+Probably;probably math
+
+relation;relation math;
 with;with math relation function;
 relations;relations math
 graph;graph theory
 graphs;graphs theory
-space;vector space math
+space;space 3d coordinate system
+on;point on line function geometry
 on;Point on Surface;
 in;in A subset of B venn diagram
 set;set math
-form;form math
-it; it geometry shapes;
 on;on  a point is on a object geometry;
 can;can dotted arrow vector;
 line;line math
 lot;lot math
+to;Point A To B
+half;half fraction
+core;core sphere
+area;area math
+more;more
+all;all dots
+
+combinatorics;combinatorics
+combination;combination permutation tree
+
+geometry;geometry
+form;form geometry
+forms;forms geometry
+it; it geometry shapes;
+kind;kind of shape
+kinds;kinds of shapes;
+model;model geometry
+models;models geometry
