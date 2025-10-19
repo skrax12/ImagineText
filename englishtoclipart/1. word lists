@@ -1,4 +1,6 @@
 overview;overview valley
+am,main;am main
+main,am;frankfurt am main
 ultimate;ultimate goal
 everything;everything;
 context;context knowledge graph
@@ -15,22 +17,171 @@ large;large adjective
 led;led lead
 a;a idea
 an;an idea
-at;at place
+at;at time or place icon
 of;a part of a whole number bonds
-for;for a desire
-from;from point in vector space math
 the;the circle transparent background
-and;and logic gate
 or;or decision
-if;if condition
-but;but contrasting
+if;if flow chart
+else;else icon;
+#but;but contrasting
 before;before after
 well;well  done
 well;in a good or satisfactory way;
 properties;properties of things
 does;does verb
 made;made creation world
-spread;spread word
 both;both things
-
+events;events city
+too;too two
+cardiovascular,system;cardiovascular system
+general;general generalization;va
+have;have hunger
+having;having hunger;va
+will;will power
+did;did achiev task
+important;important vector art;
+example;example selection
+examples;examples selection
+basic;basic pattern
+main;main point
+fact;fact icon;
+seen;seen;va
+top;top mountain
+light;light;
+west;west compass
+eastern;eastern compass
+western;western compass
+centuries;centuries;va
+century;century timeline;va
+events;events everyday
+events;events;va
+goal;goal;va
+make;make putting parts together
+makes;makes putting parts together
+damage;damage;va
+itself;itself personified geometrical shapes
+also;also in addition too
+out;out icon;
+technique;technique icon;
+this;this short arrow black icon;
+that;that long arrow vector black;
+these;these short arrows direction black icon;
+those;those long arrows direction vector black;
+there;there google earth
+expliot;exploit gold mine icon;
+now;now time icon;
+over;over arrow step icon;
+while;while icon;
+flow;flow;va
+introduction;introduction powerpoint
 bce;bce before the common era
+bear;bear verb
+reality;reality metaverse;va
+reason;reason icon
+range;range icon
+actually;actually vr
+welcome;welcome illustration;
+so;so shining circle
+reasons;reasons icon
+means;means input black box output
+spread;spread network
+practice;practice brain
+combine;combine combination
+combines;combines combination
+use;use icon;
+for;for give;va
+for;for a desire
+impossible;impossible task
+technology;technology
+only;only icon;
+principle;principle greek
+sleep,cycle;sleep cycle
+brain,activity;brain activity
+course;course;va
+Angeles,Los;Los Angeles
+Vegas,Las;Las Vegas
+lack;lack icon;
+after;after;va
+multiple;multiple icon;
+per;per icon;
+into;into icon;
+assumptions;assumptions icon;
+typically;typically usually
+computational;computational calculator;va
+representation;representation icon
+certainty;certainty icon;
+syntax;syntax tree;va
+conclusion;conclusion icon
+depends;depends icon;
+more;more less
+lived;lived life cycle biology
+logic;logic gate system
+why;why question arrows;va
+free;free freedom icon;
+lawlike;lawlike icon;
+sees;sees;va
+legacy;legacy mythology;va
+underlying;underlying icon;
+
+science;science
+computer,science;computer science
+culture;culture;va
+
+angeles,los;los angeles
+
+fisher,flynne;flynne fisher;
+flynne;flynne fisher;
+flynne's;flynne fisher's;
+ella;ella peripheral movie;
+burton;burton peripheral;
+but;but yes but memes;
+
+fundamental;fundamental structure
+commonsense;commonsense icon;
+it's;it's optical illusion
+its;its optical illusion
+it's;it's perception of geometric shapes;
+its;its perception of geometric shapes;
+change;change icon;
+dates;dates calendar
+word;word;va
+vault;vault religion;va
+match;match pictures;
+formation;formation matter chemistry
+comprehension;comprehension illustration;
+york,new;new york
+gamescom;gamescom;
+around;around circle;
+through;through icon;
+omfg;god jesus heaven
+cq;core question
+interaction;interaction icon;
+los,angeles;los angeles
+final;final tournament
+inspiration;inspiration writing illustration;
+connect;connect;va
+connection;connection;va
+connects;connects;va
+possible;possible moves in chess arrows;
+nieder-erlenbach;nieder-erlenbach;
+throughout;throughout icon;
+leave;leave place or person
+formation;formation geometric shapes;
+msc;master of science
+social,science;social science
+social,sciences;social sciences
+some;some amount
+any;any number
+primary;primary hierarchy level
+secondary;secondary hierarchy level
+tertiary;tertiary pyramid
+kirk,charlie;charlie kirk
+kirk;kirk family
+shot;shot shoot
+vice,president;vice president
+visual;visual icon;
+kimmel,jimmy;jimmy kimmel
+suspension;school suspension
+club;club interest or activity
+internet;internet;va
+logos;logos jesus

@@ -1,7 +1,11 @@
-period;time period
+period;period time
 motion;motion projectile physics
+move;move physics;va
+moves;moves physics;va
+movement;movement physics;va
 physical;physical physics
 km2;kilo meter square
 mi;mile
 state;state physics
 mass;mass physics
+exist;exist spacetime

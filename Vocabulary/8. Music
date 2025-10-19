@@ -1,12 +1,25 @@
 music;music
 
 wiki;wiki
-elements;Elements
-pitch;Pitch music
-melody;Melody music
-harmony;Harmony music
-rhythm;Rhythm music
-texture;Texture music
-timbre;Timbre music
+elements;elements
+pitch;pitch music
+pitches;pitches music
+scales;scales music
+melody;melody music
+harmony;harmony music
+rhythm;rhythm music
+texture;texture music
+timbre;timbre music
 expression;Expression music
 form;Form music
+sound,engeneering;sound engeneering
+sound,engineers;sound engineers
+mixing;mixing music
+repoduction;reproduction sound
+spaces,acoustic;acoustic spaces
+producers;producers music
+acoustic;acoustic room;va
+clefs;clefs;
+metre;metre music;
+eurological;eurological music theory
+Eurological;Eurological music theory

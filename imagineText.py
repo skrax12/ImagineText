@@ -2,12 +2,12 @@ from selenium import webdriver
 from urllib.parse import quote
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver import chrome
 import time
 import re
-import webbrowser
 import readandwrite
 import helperfunctions
+from pyswip import Prolog
+
 
 def search_images_on_google(input_data, mode, language, s, SyntacticUnit, searchPhrase):
     if language == 'cro':
@@ -56,6 +56,7 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
     else:
         # Treat the input data as a text
         text_content = input_data
+    time.sleep(3)
 
     # Split the text content into sentences
     sentences = text_content.split(".")
@@ -66,8 +67,13 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
     sentences = re.split(r'[.!?]', text_content)
     sentences = re.split(r'[-•!?]', text_content)
     #sentences = re.split(r'[–→⇒•▪”.,;:()!?]', text_content)
-    sentences = re.split(r'[-–—↔→⇒•▪”“".,;:()|!?]', text_content)
+    sentences = re.split(r'[-—↔→⇒•▪”“".;:{()}/|!?%]', text_content)
     #sentences = re.split(r'[().,:-]', text_content)
+
+    if SyntacticUnit == '':
+        sentences = re.split(r'[—↔→⇒•▪”“".;:\[{()}\]/|!?%]', text_content)
+        if mode == 'art':
+            sentences = re.split(r'[-—↔→⇒•▪”“".;:\[{()}\]/|!?%]', text_content)
 
     # Remove leading/trailing whitespaces from each sentence
     sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
@@ -78,6 +84,10 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
     while current_index < len(sentences):
         # Retrieve the current sentence based on current_index
         current_sentence = sentences[current_index]
+
+        current_sentence = current_sentence.replace(',', '')
+        current_sentence = current_sentence.replace('\'', '')
+
 
         # Clean up the sentence by removing leading/trailing whitespaces
         current_sentence = current_sentence.strip()
@@ -100,11 +110,12 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
 
             word_length = len(syntactic_units[i])
 
-            syntactic_units[i] = helperfunctions.process_text_numbers(syntactic_units[i])
+            syntactic_units[i] = str(helperfunctions.process_text_numbers(syntactic_units[i]))
 
             files = readandwrite.readdir('englishtoclipart')
 
             clipart = False
+            url = False
             for filenpath in files:  # loop through files in the current directory
                 lines = readandwrite.read(filenpath)
                 for line in lines:
@@ -112,19 +123,27 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
 
                     if "," in parts[0]:
                         subparts = [subpart.strip() for subpart in parts[0].split(',')]
-                        if syntactic_units[i-1] == subparts[0] and syntactic_units[i] == subparts[1]:
-                            syntactic_units[i] = parts[1]
-                            if len(parts) >= 3:
-                                clipart = True
-                        elif 0 <= i+1 < len(syntactic_units):
+                        if 0 <= i+1 < len(syntactic_units):
+                            syntactic_units[i+1] = syntactic_units[i+1].lower()
+                            if syntactic_units[i] == subparts[0] and syntactic_units[i+1] == subparts[1]:
+                                syntactic_units[i+1] = parts[1]
+                                if len(parts) >= 3:
+                                    clipart = True
                             if syntactic_units[i+1] == subparts[0] and syntactic_units[i] == subparts[1]:
                                 syntactic_units[i] = parts[1]
                                 if len(parts) >= 3:
                                     clipart = True
-                    elif syntactic_units[i] == parts[0]:
+                    if syntactic_units[i] == parts[0]:
                         syntactic_units[i] = parts[1]
                         if len(parts) >= 3:
                             clipart = True
+                        if len(parts) >= 3:
+                            if parts[2]== 'va':
+                                syntactic_units[i] = syntactic_units[i] + ' vector art'
+                            elif parts[2]== 'ca':
+                                syntactic_units[i] = syntactic_units[i] + ' clipart'
+                            elif parts[2]== 'url':
+                                url = True
                     # print(line)
 
             if word_length < 3:
@@ -145,13 +164,27 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
                 search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} clipart"
             elif mode == 'art':
                 #imagetype = input("Add am image type like: art clipart gif anime movie: ")
-                if clipart:
+                if url:
+                    search_query2 = encoded_syntactic_unit
+                elif clipart:
                     search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase}"
                 else:
                     search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} clipart "
+                #search_query2 = f"https://duckduckgo.com/?t=h_&q={encoded_syntactic_unit} {searchPhrase} clipart&ia=images&iax=images&iaf=type%3Aclipart"
+                #search_query2 = f"https://www.bing.com/images/search?q={encoded_syntactic_unit} {searchPhrase}%20clipart&qs=n&form=QBIR&qft=%20filterui%3Aphoto-clipart&sp=-1&lq=0&pq=test%20clipart&sc=10-12&cvid=F4801A9876794564B46D755487DB5827&ajf=10&first=1"
+                #search_query2 = f"https://www.ecosia.org/images?q={encoded_syntactic_unit} {searchPhrase} clipart&imageType=clipart"
                 #search_query2 = f"https://www.google.it/search?q={encoded_syntactic_unit} clipart&cr=countryIT&sca_esv=07360a605685315c&as_st=y&udm=2&tbs=ctr:countryIT,itp:clipart&sxsrf=AHTn8zont7zNBUGn0s09qguWGoW8Wf5JWA:1742526226277&source=lnt&sa=X&ved=2ahUKEwjFpuqFmJqMAxXE1wIHHRDMLtMQpwV6BAgBECY&biw=1660&bih=845&dpr=1.12"
                 #search_query2 = f"https://search.naver.com/search.naver?ssc=tab.image.all&where=image&sm=tab_jum&query={encoded_syntactic_unit} 클립 아트"
                 #search_query2 = f""
+            elif mode == 'vart':
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} vector art"
+            elif mode == 'try':
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase}"
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} icon"
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} clipart"
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} vector art"
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} illustration"
+                search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} art"
             elif mode == 'photo':
                 #search_query2 = f"https://www.bing.com/images/search?q={encoded_syntactic_unit}"
                 search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase}"
@@ -201,6 +234,11 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
                 t = delay_seconds/4
                 search_query = f"https://earth.google.com/web/search/{encoded_syntactic_unit}"
                 search_query2 = f"https://www.youtube.com/results?search_query={encoded_syntactic_unit}"
+            elif mode == 'starship':
+                delay_seconds = 5*float(s)
+                t = delay_seconds/4
+                search_query = f"https://earth.google.com/web/search/{encoded_syntactic_unit}"
+                search_query2 = f"https://www.youtube.com/results?search_query={encoded_syntactic_unit}"
             elif mode == 'lmaooo':
                 delay_seconds = 5*float(s)
                 t = delay_seconds/8
@@ -211,9 +249,8 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
 
             #time.sleep(5)
             # Open a new tab with the search query URL
-
             # mode == "art" or
-            if mode == "go" or mode == "art" or mode == "photo" or mode == "insta" or mode == "car" or mode == 'spaceship' or count % 2 == 1:
+            if mode == "go" or mode == "art" or mode == "vart" or mode == "photo" or mode == "insta" or mode == "car" or mode == 'spaceship' or count % 2 == 1:
                 pass
             else:
                 driver.execute_script(f"window.open('{search_query}', '_blank')")
@@ -294,6 +331,27 @@ s = input("Enter how long you want to see it: ")
 
 mode = input("how do you want to travel? \nphotograph, walk, art, car, drone, 'homerun', airplane, train, spaceship, lmaooo: ")
 searchPhrase = input("what do you want to add? ")
+
+if input_data == "prolog":
+    prolog = Prolog()
+    prolog.consult("Prolog/Prolog_PeopleAndPlaces.pl")
+    while (True):
+        input_data = input('Prolog command: ')
+
+        output_data = list(prolog.query(input_data))
+        predicate = str(input_data).split('(')[0]
+
+        output_data = input_data + str(output_data)
+
+        output_data = output_data.replace('\'', '')
+        output_data = output_data.replace(':', '')
+        output_data = output_data.replace(']', '')
+        output_data = output_data.replace('[', '')
+        output_data = output_data.replace(',', '')
+        # output_data = output_data.replace('\'','')
+
+        search_images_on_google(output_data, mode, 'chro', s, SyntacticUnit, searchPhrase)
+    readandwrite.read('Prolog/Prolog_PeopleAndPlaces.pl')
 
 # Call the function with the input data input html link or text
 while(True):
