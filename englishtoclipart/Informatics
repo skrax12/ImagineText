@@ -2,8 +2,16 @@ protocol;protocol;
 protocols;protocols;
 
 machine, learning;machine learning
+and;and logic gate
+not;not logic gate
+or;or logic gate
 
 
 unity;unity;
 ar;augmented reality
 vr;virtual reality
+xr;extended reality
+mr;mixed reality
+reality,mixed;mixed reality
+
+engine,unreal;unreal engine;

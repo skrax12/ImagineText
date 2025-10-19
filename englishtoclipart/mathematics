@@ -11,31 +11,45 @@ reasoning;reasoning test;
 probability;probability
 Probably;probably math
 
++;+ plus math
+-;- minus math
+=;= equals math
+whole;whole 1 fraction;
 relation;relation math;
 with;with math relation function;
 relations;relations math
 graph;graph theory
 graphs;graphs theory
 space;space 3d coordinate system
+spaced;spaced 3d coordinate system;
 on;point on line function geometry
 on;Point on Surface;
 in;in A subset of B venn diagram
-set;set math
 on;on  a point is on a object geometry;
 can;can dotted arrow vector;
+could;could dotted curved line vector
 line;line math
-lot;lot math
+lot;lot quantity
 to;Point A To B
+plane;plane math
 half;half fraction
 core;core sphere
 area;area math
+areas;areas math
 more;more
-all;all dots
+all;all dots black
+based;based basis math;
+
+set,theory;set theory
+set;set theory
+intersection;intersection set theory
 
 combinatorics;combinatorics
 combination;combination permutation tree
 
+
 geometry;geometry
+point;point a geometry;
 form;form geometry
 forms;forms geometry
 it; it geometry shapes;
@@ -43,3 +57,16 @@ kind;kind of shape
 kinds;kinds of shapes;
 model;model geometry
 models;models geometry
+structure;structure geometry;va
+structures;structures geometry;va
+surface;surface shapes
+curve;curve math
+
+#linear algebra
+from;from point in vector space math position;va
+from;from point in vector space math
+\land;logic and
+very;very variable math
+you;you pronoun
+limes;limes roman
+homburg;bad homburg
