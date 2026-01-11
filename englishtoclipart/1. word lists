@@ -68,6 +68,8 @@ that;that long arrow vector black;
 these;these short arrows direction black icon;
 those;those long arrows direction vector black;
 there;there google earth
+short; short long
+long;long short
 expliot;exploit gold mine icon;
 now;now time icon;
 over;over arrow step icon;
@@ -77,7 +79,7 @@ introduction;introduction powerpoint
 bce;bce before the common era
 bear;bear verb
 reality;reality metaverse;va
-reason;reason icon
+reason;reason icon;
 range;range icon
 actually;actually vr
 welcome;welcome illustration;
@@ -98,9 +100,8 @@ principle;principle greek
 sleep,cycle;sleep cycle
 brain,activity;brain activity
 course;course;va
-Angeles,Los;Los Angeles
-Vegas,Las;Las Vegas
 lack;lack icon;
+like;like heart
 after;after;va
 multiple;multiple icon;
 per;per icon;
@@ -114,14 +115,23 @@ syntax;syntax tree;va
 conclusion;conclusion icon
 depends;depends icon;
 more;more less
-lived;lived life cycle biology
-logic;logic gate system
+logic;logic table;
+operate;operate icon;
 why;why question arrows;va
 free;free freedom icon;
 lawlike;lawlike icon;
 sees;sees;va
 legacy;legacy mythology;va
+life;life human
+
+
+#ICON
 underlying;underlying icon;
+then;then icon
+executed;executed icon;
+operation;operation icon;
+may;may possibility icon;
+where;where icon;
 
 science;science
 computer,science;computer science
@@ -170,13 +180,13 @@ formation;formation geometric shapes;
 msc;master of science
 social,science;social science
 social,sciences;social sciences
-some;some amount
+s;some amount
 any;any number
 primary;primary hierarchy level
 secondary;secondary hierarchy level
 tertiary;tertiary pyramid
 kirk,charlie;charlie kirk
-kirk;kirk family
+kirk;charlie kirk family;
 shot;shot shoot
 vice,president;vice president
 visual;visual icon;
@@ -185,3 +195,4 @@ suspension;school suspension
 club;club interest or activity
 internet;internet;va
 logos;logos jesus
+science;science;va

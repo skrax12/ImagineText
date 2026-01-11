@@ -64,16 +64,23 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
     sentences = text_content.split("?")
 
     # Split the text content into sentences using multiple delimiters
-    sentences = re.split(r'[.!?]', text_content)
-    sentences = re.split(r'[-•!?]', text_content)
+    #sentences = re.split(r'[.!?]', text_content)
+    #sentences = re.split(r'[-•!?]', text_content)
     #sentences = re.split(r'[–→⇒•▪”.,;:()!?]', text_content)
-    sentences = re.split(r'[-—↔→⇒•▪”“".;:{()}/|!?%]', text_content)
+    #sentences = re.split(r'[-—↔→⇒•▪”“".;:{()}/|!?%]', text_content)
     #sentences = re.split(r'[().,:-]', text_content)
 
     if SyntacticUnit == '':
-        sentences = re.split(r'[—↔→⇒•▪”“".;:\[{()}\]/|!?%]', text_content)
+        sentences = re.split(r'[—↔→⇒•▪”“".,;:\[{()}\]/|!?%]', text_content)
+        if mode == 'art':
+            sentences = re.split(r'[—↔→⇒•▪.;:\[{()}\]/|!?]', text_content)
+    if SyntacticUnit == 'xp':
         if mode == 'art':
             sentences = re.split(r'[-—↔→⇒•▪”“".;:\[{()}\]/|!?%]', text_content)
+    if SyntacticUnit == 'p':
+        sentences = re.split(r'[-—↔→⇒•▪”“".;:\[{()}\]/|!?%]', text_content)
+        if mode == 'art':
+            sentences = re.split(r'[-—↔→⇒•▪”“";:\[{()}\]/|!?%]', text_content)
 
     # Remove leading/trailing whitespaces from each sentence
     sentences = [sentence.strip() for sentence in sentences if sentence.strip()]
@@ -168,8 +175,10 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
                     search_query2 = encoded_syntactic_unit
                 elif clipart:
                     search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase}"
+                    #search_query2 = f"https://www.google.com/search?q={encoded_syntactic_unit} {searchPhrase}&sca_esv=2e41414a5e61d415&udm=2&sxsrf=AE3TifOVesOB0m4SY64R3-YwD9V7TDzFkg:1763890740824&source=lnt&tbs=itp:clipart"
                 else:
                     search_query2 = f"https://www.google.com/search?tbm=isch&q={encoded_syntactic_unit} {searchPhrase} clipart "
+                    #search_query2 = f"https://www.google.com/search?q={encoded_syntactic_unit} {searchPhrase}&sca_esv=2e41414a5e61d415&udm=2&sxsrf=AE3TifOVesOB0m4SY64R3-YwD9V7TDzFkg:1763890740824&source=lnt&tbs=itp:clipart"
                 #search_query2 = f"https://duckduckgo.com/?t=h_&q={encoded_syntactic_unit} {searchPhrase} clipart&ia=images&iax=images&iaf=type%3Aclipart"
                 #search_query2 = f"https://www.bing.com/images/search?q={encoded_syntactic_unit} {searchPhrase}%20clipart&qs=n&form=QBIR&qft=%20filterui%3Aphoto-clipart&sp=-1&lq=0&pq=test%20clipart&sc=10-12&cvid=F4801A9876794564B46D755487DB5827&ajf=10&first=1"
                 #search_query2 = f"https://www.ecosia.org/images?q={encoded_syntactic_unit} {searchPhrase} clipart&imageType=clipart"
@@ -264,9 +273,13 @@ def search_images_on_google(input_data, mode, language, s, SyntacticUnit, search
 
             time.sleep(delay_seconds)
             #count += 1
-        time.sleep(3)
-            # Calculate the delay based on the length of the word or phrase
 
+        if SyntacticUnit ==  'p':
+            time.sleep(2)
+        else:
+            # Calculate the delay based on the length of the word or phrase
+            sp = len(syntactic_units) * 2.2  # sentence pause
+            time.sleep(sp)
 
         # Wait for the user input
         x = 0
@@ -334,7 +347,8 @@ searchPhrase = input("what do you want to add? ")
 
 if input_data == "prolog":
     prolog = Prolog()
-    prolog.consult("Prolog/Prolog_PeopleAndPlaces.pl")
+    prolog.consult("Prolog/usasearch")
+    #prolog.consult("Prolog/Prolog_PeopleAndPlaces.pl")
     while (True):
         input_data = input('Prolog command: ')
 
@@ -351,7 +365,8 @@ if input_data == "prolog":
         # output_data = output_data.replace('\'','')
 
         search_images_on_google(output_data, mode, 'chro', s, SyntacticUnit, searchPhrase)
-    readandwrite.read('Prolog/Prolog_PeopleAndPlaces.pl')
+    readandwrite.read('Prolog/usasearch')
+    #readandwrite.read('Prolog/Prolog_PeopleAndPlaces.pl')
 
 # Call the function with the input data input html link or text
 while(True):

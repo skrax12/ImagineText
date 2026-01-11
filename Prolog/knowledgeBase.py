@@ -6,12 +6,12 @@ import readandwrite
 #https://www.youtube.com/watch?v=1jwAHIz8WXc
 
 prolog = Prolog()
-prolog.consult("Prolog_PeopleAndPlaces.pl")
+prolog.consult("earthsearch")
 
 #truth = bool(list(prolog.query("place(home)")))
 #facts = (list(prolog.query('connection(City1, City2, Distance)')))
 
-readandwrite.read('Prolog_PeopleAndPlaces.pl')
+readandwrite.read('earthsearch')
 
 def facttostringold():
     predicate = str(input_data).split('(')[0]
@@ -48,7 +48,7 @@ while(True):
 #       for x, y in item.items():
 #           data = data + ': ' + x + ', ' + y
 #   print(data)
-        
+
     #for fact in output_data:
     #    fact1 = []
     #    print(fact)
