@@ -1,4 +1,5 @@
 #math
+central;central math;
 
 logic;logic
 assumption;assumption logic math
@@ -14,6 +15,7 @@ Probably;probably math
 +;+ plus math
 -;- minus math
 =;= equals math
+some;some sum symbol;
 whole;whole 1 fraction;
 relation;relation math;
 with;with math relation function;
@@ -21,6 +23,7 @@ relations;relations math
 graph;graph theory
 graphs;graphs theory
 space;space 3d coordinate system
+spaces;spaces 3d coordinate system
 spaced;spaced 3d coordinate system;
 on;point on line function geometry
 on;Point on Surface;
@@ -30,6 +33,8 @@ can;can dotted arrow vector;
 could;could dotted curved line vector
 line;line math
 lot;lot quantity
+long;long short ruler
+short;short long ruler
 to;Point A To B
 plane;plane math
 half;half fraction
@@ -41,11 +46,13 @@ all;all dots black
 based;based basis math;
 
 set,theory;set theory
-set;set theory
+set;set theory;
 intersection;intersection set theory
 
 combinatorics;combinatorics
 combination;combination permutation tree
+arrangement;arrangement math
+arrangements;arrangements math
 
 
 geometry;geometry
@@ -60,7 +67,20 @@ models;models geometry
 structure;structure geometry;va
 structures;structures geometry;va
 surface;surface shapes
+surfaces;surfaces shapes
 curve;curve math
+#topology
+topology;topology math
+
+p1;position 1
+p2;position 2
+p3;position 3
+p4;position 4
+p5;position 5
+p6;position 6
+p7;position 7
+p8;position 8
+
 
 #linear algebra
 from;from point in vector space math position;va

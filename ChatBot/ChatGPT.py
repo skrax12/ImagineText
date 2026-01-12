@@ -3,7 +3,8 @@ import google.generativeai as genai
 # Configure the API key
 # It's generally not recommended to hardcode API keys directly in your script.
 # Consider using environment variables or a secure configuration management system.
-genai.configure(api_key="AIzaSyCyj2wCeevB2xkKVHItw3nbCtBYX4F8WEc")  # Replace "YOUR_API_KEY" with your actual API key
+
+genai.configure(api_key="AIzaSyC1ToYXd74bUPNtoOCUahVXCPj-d3FD1xg")  # Replace "YOUR_API_KEY" with your actual API key
 
 # Initialize the Generative Model
 # The class name should be 'GenerativeModel', not 'GenerativeAiModel'

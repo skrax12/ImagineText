@@ -2,6 +2,7 @@ music;music
 
 wiki;wiki
 elements;elements
+beat;beat music
 pitch;pitch music
 pitches;pitches music
 scales;scales music
@@ -11,7 +12,7 @@ rhythm;rhythm music
 texture;texture music
 timbre;timbre music
 expression;Expression music
-form;Form music
+form;form music
 sound,engeneering;sound engeneering
 sound,engineers;sound engineers
 mixing;mixing music

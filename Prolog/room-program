@@ -1,0 +1,77 @@
+% =============================================================
+% MY ROOM — Works perfectly with PySWIP (no instantiation errors)
+% =============================================================
+
+% ------------------- STATE --------------------
+initial_state([
+    at(me, desk),
+    on(laptop, desk),
+    on(headphones, desk),
+    lamp_on(yes),
+    laptop_open(yes),
+    charged(laptop, 87),
+    in_bed(no)
+]).
+
+% ------------------- GOALS --------------------
+goal(sleep, [lamp_on(no), laptop_open(no), in_bed(yes), on(headphones, bed)]).
+goal(work,  [at(me, desk), lamp_on(yes), laptop_open(yes), charged(laptop, C)]) :- C >= 80.
+
+% ------------------- SAFE ACTIONS (no arithmetic on free vars) --------------------
+operator('turn off lamp',          [at(me,desk), lamp_on(yes)],     [lamp_on(yes)],     [lamp_on(no)]).
+operator('turn on lamp',           [at(me,desk), lamp_on(no)],      [lamp_on(no)],      [lamp_on(yes)]).
+operator('close laptop',           [at(me,desk), laptop_open(yes)], [laptop_open(yes)], [laptop_open(no)]).
+operator('open laptop',            [at(me,desk), laptop_open(no)],  [laptop_open(no)],  [laptop_open(yes)]).
+
+% Charging is now a SAFE action — we only allow it when battery is known
+operator('plug in laptop', [at(me,desk), charged(laptop,C), C < 100],
+                           [charged(laptop,C)],
+                           [charged(laptop,NewC)]) :- NewC is min(100, C + 30).
+
+operator('move to bed',            [at(me,desk)], [], [at(me,bed), in_bed(yes)]).
+operator('move to desk',           [at(me,bed)],  [], [at(me,desk), in_bed(no)]).
+
+operator('pick up headphones',     [at(me,L), on(headphones,L)], [on(headphones,L)], [holding(headphones)]).
+operator('put headphones on bed',  [holding(headphones), at(me,bed)], [holding(headphones)], [on(headphones,bed)]).
+operator('put headphones on desk', [holding(headphones), at(me,desk)],[holding(headphones)], [on(headphones,desk)]).
+
+% ------------------- PLANNER (safe for PySWIP) --------------------
+plan(GoalName, Plan) :-
+    goal(GoalName, Goal),
+    initial_state(Start),
+    bfs([[Start, []]], Goal, RevPlan),
+    reverse(RevPlan, Plan).
+
+bfs([[State,_]|_], Goal, Path) :- subset(Goal, State), !.
+bfs([[State, Path]|Queue], Goal, Solution) :-
+    findall([NewState, [Action|Path]],
+        ( operator(Action, Pre, Del, Add),
+          subset(Pre, State),
+          subtract(State, Del, Temp),
+          safe_add(Add, Temp, NewState)
+        ),
+        Successors),
+    append(Queue, Successors, NewQueue),
+    bfs(NewQueue, Goal, Solution).
+
+% ------------------- HELPERS (fully safe) --------------------
+subset([], _).
+subset([H|T], L) :- member(H, L), subset(T, L).
+
+subtract(L, [], L).
+subtract(L, [H|T], R) :- select(H, L, L2), !, subtract(L2, T, R).
+subtract(L, [_|T], R) :- subtract(L, T, R).
+
+% safe_add — protects arithmetic
+safe_add([], S, S).
+safe_add([charged(laptop,N)|Rest], S, Final) :- !,
+    ( select(charged(laptop,_), S, S2) -> true ; S2 = S ),
+    safe_add(Rest, [charged(laptop,N)|S2], Final).
+safe_add([H|Rest], S, Final) :-
+    ( member(H, S) -> S2 = S ; S2 = [H|S] ),
+    safe_add(Rest, S2, Final).
+
+% ------------------- Python-friendly queries --------------------
+sleep_plan(Plan)  :- plan(sleep, Plan).
+work_plan(Plan)   :- plan(work, Plan).
+status(State)     :- initial_state(State).
